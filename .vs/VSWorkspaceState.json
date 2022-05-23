@@ -1,4 +1,9 @@
 {
-  "ExpandedNodes": [],
+  "ExpandedNodes": [
+    "",
+    "\\UserService",
+    "\\UserService\\Controllers"
+  ],
+  "SelectedNode": "\\UserService\\Controllers",
   "PreviewInSolutionExplorer": false
 }
