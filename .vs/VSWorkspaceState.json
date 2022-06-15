@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\UserService",
+    "\\UserService\\UserService",
+    "\\UserService\\UserService\\Controllers",
+    "\\UserService\\UserService\\Entities"
   ],
-  "SelectedNode": "\\C:\\Users\\djuro\\Source\\Repos\\tim_11_socialbuzz-mms-team",
+  "SelectedNode": "\\UserService\\UserService\\Entities\\User.cs",
   "PreviewInSolutionExplorer": false
 }
