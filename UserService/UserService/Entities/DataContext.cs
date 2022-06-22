@@ -6,7 +6,7 @@ namespace UserService.Entities
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
-        public DbSet<User> Users { get; set; }
+        //public DbSet<User> Users { get; set; }
         /*public DbSet<PersonalUser> PersonalUsers { get; set; }
         public DbSet<CorporateUser> CorporateUsers { get; set; }*/
 
@@ -17,7 +17,9 @@ namespace UserService.Entities
             /*modelBuilder.Entity<PersonalUser>().ToTable("PersonalUsers");
             modelBuilder.Entity<CorporateUser>().ToTable("CorporateUsers");*/
 
-            
+            modelBuilder.Entity<Role>()
+                .HasIndex(e => e.RoleName)
+                .IsUnique();
                 
         }
     }

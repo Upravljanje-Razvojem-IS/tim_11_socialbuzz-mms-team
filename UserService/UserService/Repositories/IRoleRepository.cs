@@ -1,22 +1,22 @@
 ﻿using System.Collections.Generic;
-using UserService.Entities;
+using UserService.DTOs.RoleDTOs;
 
 namespace UserService.Repositories
 {
     public interface IRoleRepository
     {
-        List<Role> GetAll();
+        List<RoleReadDTO> GetAll();
 
-        Role GetById(int id);
+        RoleReadDTO GetById(int id);
 
-        Role CreateRole(Role role);
-        Role UpdateRole(Role role);
+        RoleCreateDTO CreateRole(RoleCreateDTO role);
+        RoleCreateDTO UpdateRole(int id, RoleCreateDTO role);
         void DeleteRole(int id);
 
         //Dodatne metode
-        Role GetByRole(string roleName);
+        RoleReadDTO GetByRoleName(string roleName);
 
-        List<User> GetAllUsersByRole(string roleName);
+        
 
 
     }

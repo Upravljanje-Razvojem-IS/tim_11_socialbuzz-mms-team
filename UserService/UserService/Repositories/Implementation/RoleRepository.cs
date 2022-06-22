@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using UserService.Attributes;
+using UserService.DTOs.RoleDTOs;
 using UserService.Entities;
 
 namespace UserService.Repositories.Implementation
@@ -13,42 +15,93 @@ namespace UserService.Repositories.Implementation
             this.context = context;
         }
 
-        //metode
-        public Role CreateRole(Role role)
+        public RoleCreateDTO CreateRole(RoleCreateDTO role)
         {
-            throw new System.NotImplementedException();
+            var roleEF = new Role();
+            string roleName = role.RoleName;
+            if (string.IsNullOrEmpty(roleName))
+                throw new AppException("Rolename can't be empty");
+            if (RoleNameExists(roleName))
+                throw new UniqueException(roleName + " already exists, role name must be unique");
+            roleEF.RoleName = roleName;
+            context.Roles.Add(roleEF);
+            context.SaveChanges();
+            return role;
+
         }
 
         public void DeleteRole(int id)
         {
-            throw new System.NotImplementedException();
+            var role = context.Roles.Find(id);
+            if (role == null)
+                throw new AppException("Role doesn't exist");
+            context.Roles.Remove(role);
+            context.SaveChanges();
         }
 
-        public List<Role> GetAll()
+        public List<RoleReadDTO> GetAll()
         {
-            var roleList = context.Roles.ToList();
+            var roles = context.Roles.ToList();
+            if (roles == null)
+                throw new AppException("No roles found in database");
+            var rolesDTO = roles.Select(roles => new RoleReadDTO
+            {
+                RoleId = roles.RoleId,
+                RoleName = roles.RoleName,
+            }).ToList();
 
-            return roleList;
+            return rolesDTO;
         }
 
-        public List<User> GetAllUsersByRole(string roleName)
+        public RoleReadDTO GetById(int id)
         {
-            throw new System.NotImplementedException();
+            var role = context.Roles.Find(id);
+            if (role == null)
+                throw new AppException("Role with id: " + id + " was not found");
+            var roleDTO = new RoleReadDTO();
+            roleDTO.RoleId = role.RoleId;
+            roleDTO.RoleName = role.RoleName;
+            return roleDTO;
+
         }
 
-        public Role GetById(int id)
-        {
-            throw new System.NotImplementedException();
+        public RoleReadDTO GetByRoleName(string roleName)
+        { 
+            var role = context.Roles.FirstOrDefault(r => r.RoleName == roleName);
+            /*if (role == null)
+                throw new AppException("Role with name: " + roleName + " was not found");*/
+            var roleDTO = new RoleReadDTO();
+            roleDTO.RoleId = role.RoleId;
+            roleDTO.RoleName= role.RoleName;
+            return roleDTO;
         }
 
-        public Role GetByRole(string roleName)
+        public RoleCreateDTO UpdateRole(int id, RoleCreateDTO role)
         {
-            throw new System.NotImplementedException();
+            var roleEF = context.Roles.Find(id);
+            if (roleEF == null)
+                throw new Attributes.KeyNotFoundException("Role with id: " + id + " was not found");
+            string roleName = role.RoleName;
+            if (string.IsNullOrEmpty(roleName))
+                throw new AppException("Rolename cannot be empty string");
+            if (RoleNameExists(roleName))
+                throw new UniqueException("Role with name:" + roleName + " already exists, role name must be unique");
+            roleEF.RoleName = roleName;
+            context.Roles.Update(roleEF);
+            context.SaveChanges();
+            return role;
+
+
         }
 
-        public Role UpdateRole(Role role)
+        private bool RoleExists(int id)
         {
-            throw new System.NotImplementedException();
+            return context.Roles.Any(e => e.RoleId == id);
+        }
+
+        private bool RoleNameExists(string roleName)
+        {
+            return context.Roles.Any(e => e.RoleName == roleName);
         }
     }
 }

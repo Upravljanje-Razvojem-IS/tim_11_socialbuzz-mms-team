@@ -11,7 +11,6 @@ namespace UserService.Entities
         [Required]
         public string RoleName { get; set; }
 
-        public ICollection<User> Users { get; set; }
 
     }
 }
