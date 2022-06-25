@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using UserService.DTOs.RoleDTOs;
 using UserService.Repositories;
 
@@ -25,7 +24,7 @@ namespace UserService.Controllers
             return Ok(roles);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public ActionResult GetRoleById(int id)
         {
             var role = roleRepository.GetById(id);
@@ -35,7 +34,8 @@ namespace UserService.Controllers
             return Ok(role);
         }
 
-        [HttpGet("GetByRolename/{RoleName}")]
+        [HttpGet()]
+        [Route("GetByRolename/{roleName}")]
         public ActionResult GetByRoleName(string roleName)
         {
             var role = roleRepository.GetByRoleName(roleName);

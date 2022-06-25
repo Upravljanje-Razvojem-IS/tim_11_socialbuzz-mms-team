@@ -66,10 +66,11 @@ namespace UserService.Repositories.Implementation
         }
 
         public RoleReadDTO GetByRoleName(string roleName)
-        { 
+        {
+            
             var role = context.Roles.FirstOrDefault(r => r.RoleName == roleName);
-            /*if (role == null)
-                throw new AppException("Role with name: " + roleName + " was not found");*/
+            if (role == null)
+                throw new AppException("Role with name: " + roleName + " was not found");
             var roleDTO = new RoleReadDTO();
             roleDTO.RoleId = role.RoleId;
             roleDTO.RoleName= role.RoleName;
@@ -92,12 +93,7 @@ namespace UserService.Repositories.Implementation
             return role;
 
 
-        }
-
-        private bool RoleExists(int id)
-        {
-            return context.Roles.Any(e => e.RoleId == id);
-        }
+        }        
 
         private bool RoleNameExists(string roleName)
         {

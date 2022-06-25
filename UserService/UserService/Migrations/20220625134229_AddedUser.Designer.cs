@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UserService.Entities;
 
 namespace UserService.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220625134229_AddedUser")]
+    partial class AddedUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,40 +80,6 @@ namespace UserService.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("UserService.Entities.CorporateUser", b =>
-                {
-                    b.HasBaseType("UserService.Entities.User");
-
-                    b.Property<string>("CorporationName")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("PIB")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasIndex("CorporationName")
-                        .IsUnique()
-                        .HasFilter("[CorporationName] IS NOT NULL");
-
-                    b.HasIndex("PIB")
-                        .IsUnique()
-                        .HasFilter("[PIB] IS NOT NULL");
-
-                    b.ToTable("CorporateUsers");
-                });
-
-            modelBuilder.Entity("UserService.Entities.PersonalUser", b =>
-                {
-                    b.HasBaseType("UserService.Entities.User");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.ToTable("PersonalUsers");
-                });
-
             modelBuilder.Entity("UserService.Entities.User", b =>
                 {
                     b.HasOne("UserService.Entities.Role", "Role")
@@ -121,24 +89,6 @@ namespace UserService.Migrations
                         .IsRequired();
 
                     b.Navigation("Role");
-                });
-
-            modelBuilder.Entity("UserService.Entities.CorporateUser", b =>
-                {
-                    b.HasOne("UserService.Entities.User", null)
-                        .WithOne()
-                        .HasForeignKey("UserService.Entities.CorporateUser", "Id")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("UserService.Entities.PersonalUser", b =>
-                {
-                    b.HasOne("UserService.Entities.User", null)
-                        .WithOne()
-                        .HasForeignKey("UserService.Entities.PersonalUser", "Id")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
