@@ -179,22 +179,34 @@ namespace UserService.Repositories.Implementation
 
         private bool UsernameExists(string username)
         {
-            return context.Users.Any(u => u.Username == username);
+            bool user = context.Users.Any(u => u.Username == username);
+            bool userP = context.PersonalUsers.Any(u => u.Username == username);
+            bool userC = context.CorporateUsers.Any(u => u.Username == username);
+            if (user || userP || userC)
+                return true;
+            return false;
         }
 
         private bool EmailExists(string email)
         {
-            return context.Users.Any(u => u.Email == email);
+            bool user = context.Users.Any(u => u.Email == email);
+            bool userP = context.PersonalUsers.Any(u => u.Email == email);
+            bool userC = context.CorporateUsers.Any(u => u.Email == email);
+            if (user || userP || userC)
+                return true;
+            return false;
         }
 
         private bool ContactExists(string contact)
         {
-            return context.Users.Any(u => u.Contact == contact);
+            bool user = context.Users.Any(u => u.Contact == contact);
+            bool userP = context.PersonalUsers.Any(u => u.Contact == contact);
+            bool userC = context.CorporateUsers.Any(u => u.Contact == contact);
+            if (user || userP || userC)
+                return true;
+            return false;
         }
 
-        private bool RoleExists(int id)
-        {
-            return context.Roles.Any(e => e.RoleId == id);
-        }
+
     }
 }

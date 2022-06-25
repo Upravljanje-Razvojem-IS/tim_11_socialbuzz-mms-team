@@ -1,9 +1,9 @@
-﻿namespace UserService.DTOs.PersonalUserDTO
+﻿namespace UserService.DTOs.CorporateUserDTO
 {
-    public class PersonalUserCreateDTO
+    public class CorporateUserCreateDTO
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string CorporationName { get; set; }
+        public string PIB { get; set; }
         public string Email { get; set; }
         public string Username { get; set; }
         public string Contact { get; set; }

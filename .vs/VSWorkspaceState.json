@@ -3,9 +3,9 @@
     "",
     "\\UserService",
     "\\UserService\\UserService",
-    "\\UserService\\UserService\\Controllers",
-    "\\UserService\\UserService\\Entities"
+    "\\UserService\\UserService\\Repositories",
+    "\\UserService\\UserService\\Repositories\\Implementation"
   ],
-  "SelectedNode": "\\UserService\\UserService.sln",
+  "SelectedNode": "\\UserService\\UserService\\Repositories\\Implementation\\PersonalUserRepository.cs",
   "PreviewInSolutionExplorer": false
 }

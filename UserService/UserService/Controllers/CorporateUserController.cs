@@ -1,19 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Linq;
-using UserService.DTOs.PersonalUserDTO;
-using UserService.Entities;
-using UserService.Repositories;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using UserService.DTOs.CorporateUserDTO;
+using UserService.Repositories.Implementation;
 
 namespace UserService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PersonalUserController : ControllerBase
+    public class CorporateUserController : ControllerBase
     {
-        
-        private readonly IPersonalUserRepository repository;
+        private readonly ICorporateUserRepository repository;
 
-        public PersonalUserController(IPersonalUserRepository repository)
+        public CorporateUserController(ICorporateUserRepository repository)
         {
             this.repository = repository;
         }
@@ -21,63 +19,63 @@ namespace UserService.Controllers
         [HttpGet]
         public ActionResult GetAll()
         {
-            var personal = repository.GetAllPersonalUsers();
-            if(personal == null)
+            var corporate = repository.GetAllCorporateUsers();
+            if (corporate == null)
                 return NotFound();
-            return Ok(personal);
+            return Ok(corporate);
 
         }
 
         [HttpGet]
-        [Route("GetByPersonalUserId/{id}")]
+        [Route("GetByCorporateUserId/{id}")]
         public ActionResult GetById(int id)
         {
-            var user = repository.GetPersonalUserById(id);
-            if (user == null)
+            var corporate = repository.GetCorporateUserById(id);
+            if (corporate == null)
                 return NotFound();
-            return Ok(user);
+            return Ok(corporate);
         }
 
         [HttpPost]
-        public ActionResult AddPersonalUser(PersonalUserCreateDTO user)
+        public ActionResult AddCorporateUser(CorporateUserCreateDTO cUser)
         {
-            if (user == null)
+            if (cUser == null)
             {
                 return BadRequest();
             }
 
-            repository.CreatePersonalUser(user);
-            return Ok(new { message = "User created" });
+            repository.CreateCorporateUser(cUser);
+            return Ok(new { message = "Corporate user created" });
         }
 
         [HttpPut]
-        public ActionResult UpdatePersonal(int id, PersonalUserCreateDTO user)
+        public ActionResult UpdateCorporateUser(int id, CorporateUserCreateDTO cUser)
         {
-            if (id == null || user == null)
+            if (id == null || cUser == null)
             {
                 return BadRequest();
             }
-            var userE = repository.GetPersonalUserById(id);
+            var userE = repository.GetCorporateUserById(id);
             if (userE == null)
                 return NotFound();
-            repository.UpdatePersonalUser(id, user);
-            return Ok(new { message = "Personal user updated" });
+            repository.UpdateCorporatelUser(id, cUser);
+            return Ok(new { message = "Corporate user updated" });
         }
 
         [HttpDelete]
-        public ActionResult DeletePersonalUser(int id)
+        public ActionResult DeleteCorporateUser(int id)
         {
             if (id == null)
             {
                 return BadRequest();
             }
-            var user = repository.GetPersonalUserById(id);
+            var user = repository.GetCorporateUserById(id);
             if (user == null)
             {
                 return NotFound();
             }
-            repository.DeletePersonalUser(id);
-            return Ok(new { message = "Personal user deleted" });
+            repository.DeleteCorporateUser(id);
+            return Ok(new { message = "Corporate user deleted" });
         }
 
         [HttpGet]
@@ -111,35 +109,33 @@ namespace UserService.Controllers
         }
 
         [HttpGet]
-        [Route("GetPersonalUsersByIsActive/{isActive}")]
+        [Route("GetCorporateUsersByIsActive/{isActive}")]
         public ActionResult GetByContact(bool isActive)
         {
-            var users = repository.GetPersonalUsersByActive(isActive);
+            var users = repository.GetCorporateUsersByActive(isActive);
+            if (users.Count == 0)
+                return NotFound("Not found");
+            return Ok(users);
+        }
+
+        [HttpGet]
+        [Route("GetByCorporationName/{corporationName}")]
+        public ActionResult GetByCorporationname(string corporationName)
+        {
+            var users = repository.GetByCorporationName(corporationName);
             if (users == null)
                 return NotFound();
             return Ok(users);
         }
 
         [HttpGet]
-        [Route("GetPersonalUsersByFirstName/{firstName}")]
-        public ActionResult GetPersonalUsersByFirstName(string firstName)
+        [Route("GetByCompanyPIB/{PIB}")]
+        public ActionResult GetByCompanyPIB(string PIB)
         {
-            var users = repository.GetPersonalUsersByFirstName(firstName);
+            var users = repository.GetByPIB(PIB);
             if (users == null)
                 return NotFound();
             return Ok(users);
         }
-
-        [HttpGet]
-        [Route("GetPersonalUsersByLastName/{lastName}")]
-        public ActionResult GetUsersByLastName(string lastName)
-        {
-            var users = repository.GetPersonalUsersByLastName(lastName);
-            if (users == null)
-                return NotFound();
-            return Ok(users);
-        }
-
-
     }
 }

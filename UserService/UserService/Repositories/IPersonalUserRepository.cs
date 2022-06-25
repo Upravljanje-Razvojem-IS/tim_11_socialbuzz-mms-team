@@ -12,5 +12,13 @@ namespace UserService.Repositories
         void DeletePersonalUser(int id);
 
 
+        PersonalUserReadDTO GetByUsername(string username);
+        PersonalUserReadDTO GetByContact(string contact);
+        PersonalUserReadDTO GetByEmail(string email);
+        List<PersonalUserReadDTO> GetPersonalUsersByActive(bool isActive);
+        List<PersonalUserReadDTO> GetPersonalUsersByFirstName(string firstName);
+        List<PersonalUserReadDTO> GetPersonalUsersByLastName(string lastName);
+
+
     }
 }
