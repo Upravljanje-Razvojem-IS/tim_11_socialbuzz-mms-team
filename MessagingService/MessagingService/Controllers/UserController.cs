@@ -1,6 +1,5 @@
 ﻿using MessagingService.DTOs.UserDTOs;
 using MessagingService.Repositories;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MessagingService.Controllers
@@ -20,7 +19,7 @@ namespace MessagingService.Controllers
         public ActionResult GetAll()
         {
             var users = repository.GetAll();
-            if(users.Count == 0)
+            if(users.Count < 0)
                 return NoContent();
             return Ok(users);
         }

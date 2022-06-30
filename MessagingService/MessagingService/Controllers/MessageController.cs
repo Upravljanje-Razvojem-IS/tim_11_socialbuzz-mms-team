@@ -2,6 +2,7 @@
 using MessagingService.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace MessagingService.Controllers
 {
@@ -20,7 +21,7 @@ namespace MessagingService.Controllers
         public ActionResult GetAll()
         {
             var messages = repository.GetAll();
-            if(messages == null)
+            if(messages.Count() < 0)
                 return NotFound();
             return Ok(messages);
         }

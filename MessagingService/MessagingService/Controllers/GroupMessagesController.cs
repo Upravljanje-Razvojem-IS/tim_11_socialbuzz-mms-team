@@ -1,6 +1,5 @@
 ﻿using MessagingService.DTOs.GroupMessageDTOs;
 using MessagingService.Repositories;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MessagingService.Controllers

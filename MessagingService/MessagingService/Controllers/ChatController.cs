@@ -1,7 +1,5 @@
 ﻿using MessagingService.DTOs.ChatDTOs;
-using MessagingService.Entities;
 using MessagingService.Repositories;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
@@ -22,7 +20,7 @@ namespace MessagingService.Controllers
         public ActionResult GetAll()
         {
             var chats = repository.GetAll();
-            if(chats.Count == 0)
+            if(chats.Count () < 0)
                 return NotFound();
             return Ok(chats);
         }
