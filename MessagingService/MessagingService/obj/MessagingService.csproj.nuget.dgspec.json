@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\x\\Source\\Repos\\tim_11_socialbuzz-mms-team\\MessagingService\\MessagingService\\MessagingService.csproj": {}
+    "C:\\Users\\djuro\\source\\repos\\tim_11_socialbuzz-mms-team\\MessagingService\\MessagingService\\MessagingService.csproj": {}
   },
   "projects": {
-    "C:\\Users\\x\\Source\\Repos\\tim_11_socialbuzz-mms-team\\MessagingService\\MessagingService\\MessagingService.csproj": {
+    "C:\\Users\\djuro\\source\\repos\\tim_11_socialbuzz-mms-team\\MessagingService\\MessagingService\\MessagingService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\x\\Source\\Repos\\tim_11_socialbuzz-mms-team\\MessagingService\\MessagingService\\MessagingService.csproj",
+        "projectUniqueName": "C:\\Users\\djuro\\source\\repos\\tim_11_socialbuzz-mms-team\\MessagingService\\MessagingService\\MessagingService.csproj",
         "projectName": "MessagingService",
-        "projectPath": "C:\\Users\\x\\Source\\Repos\\tim_11_socialbuzz-mms-team\\MessagingService\\MessagingService\\MessagingService.csproj",
-        "packagesPath": "C:\\Users\\x\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\x\\Source\\Repos\\tim_11_socialbuzz-mms-team\\MessagingService\\MessagingService\\obj\\",
+        "projectPath": "C:\\Users\\djuro\\source\\repos\\tim_11_socialbuzz-mms-team\\MessagingService\\MessagingService\\MessagingService.csproj",
+        "packagesPath": "C:\\Users\\djuro\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\djuro\\source\\repos\\tim_11_socialbuzz-mms-team\\MessagingService\\MessagingService\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\x\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\djuro\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -80,7 +77,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }
