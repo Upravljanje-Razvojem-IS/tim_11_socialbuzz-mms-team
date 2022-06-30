@@ -1,6 +1,5 @@
 ﻿using MessagingService.DTOs.UserGroupChat;
 using MessagingService.Repositories;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MessagingService.Controllers
