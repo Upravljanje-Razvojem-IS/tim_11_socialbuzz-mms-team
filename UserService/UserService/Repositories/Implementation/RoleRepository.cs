@@ -42,7 +42,7 @@ namespace UserService.Repositories.Implementation
         public List<RoleReadDTO> GetAll()
         {
             var roles = context.Roles.ToList();
-            if (roles == null)
+            if (roles.Count() < 0)
                 throw new AppException("No roles found in database");
             var rolesDTO = roles.Select(roles => new RoleReadDTO
             {

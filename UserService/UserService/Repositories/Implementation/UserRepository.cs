@@ -45,7 +45,7 @@ namespace UserService.Repositories.Implementation
         public List<UserReadDTO> GetAllUsers()
         {
             var users = context.Users.ToList();
-            if (users == null)
+            if (users.Count() < 0)
                 throw new AppException("No users in database");
             var usersDTO = users.Select(u => new UserReadDTO
             {
@@ -143,7 +143,7 @@ namespace UserService.Repositories.Implementation
         public List<UserReadDTO> GetUsersByActive(bool isActive)
         {
             var users = context.Users.Where(u => u.isActive == isActive).ToList();
-            if (users == null)
+            if (users.Count() < 0)
                 throw new AppException("No users in database");
             var usersDTO = users.Select(u => new UserReadDTO
             {
@@ -161,7 +161,7 @@ namespace UserService.Repositories.Implementation
         public List<UserReadDTO> GetUsersByRole(string role)
         {
             var users = context.Users.Where(u => u.Role.RoleName == role).ToList();
-            if (users == null)
+            if (users.Count() < 0)
                 throw new AppException("No users in database");
             var usersDTO = users.Select(u => new UserReadDTO
             {

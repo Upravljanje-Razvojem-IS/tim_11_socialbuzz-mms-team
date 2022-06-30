@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using UserService.DTOs.UserDTOs;
 using UserService.Repositories;
 
@@ -19,7 +20,7 @@ namespace UserService.Controllers
         public ActionResult GetAll()
         {
             var users = repository.GetAllUsers();
-            if(users == null)
+            if(users.Count() < 0)
                 return NotFound();
             return Ok(users);
         }
@@ -49,7 +50,7 @@ namespace UserService.Controllers
         [HttpPut]
         public ActionResult UpdateAdmin(int id, UserCreateDTO user)
         {
-            if(id == null || user == null)
+            if(id < 0|| user == null)
             {
                 return BadRequest();
             }
@@ -63,7 +64,7 @@ namespace UserService.Controllers
         [HttpDelete]
         public ActionResult DeleteUser(int id)
         {
-            if (id == null)
+            if (id < 0)
             {
                 return BadRequest();
             }

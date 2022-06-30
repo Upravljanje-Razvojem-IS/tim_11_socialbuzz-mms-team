@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using UserService.DTOs.CorporateUserDTO;
 using UserService.Repositories.Implementation;
 
@@ -20,7 +21,7 @@ namespace UserService.Controllers
         public ActionResult GetAll()
         {
             var corporate = repository.GetAllCorporateUsers();
-            if (corporate == null)
+            if (corporate.Count() <0)
                 return NotFound();
             return Ok(corporate);
 
@@ -51,7 +52,7 @@ namespace UserService.Controllers
         [HttpPut]
         public ActionResult UpdateCorporateUser(int id, CorporateUserCreateDTO cUser)
         {
-            if (id == null || cUser == null)
+            if (id < 0 || cUser == null)
             {
                 return BadRequest();
             }
@@ -65,7 +66,7 @@ namespace UserService.Controllers
         [HttpDelete]
         public ActionResult DeleteCorporateUser(int id)
         {
-            if (id == null)
+            if (id < 0)
             {
                 return BadRequest();
             }
@@ -113,7 +114,7 @@ namespace UserService.Controllers
         public ActionResult GetByContact(bool isActive)
         {
             var users = repository.GetCorporateUsersByActive(isActive);
-            if (users.Count == 0)
+            if (users.Count < 0)
                 return NotFound("Not found");
             return Ok(users);
         }

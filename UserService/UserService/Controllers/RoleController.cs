@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using UserService.DTOs.RoleDTOs;
 using UserService.Repositories;
 
@@ -19,7 +20,7 @@ namespace UserService.Controllers
         public ActionResult GetAll()
         {
             var roles = roleRepository.GetAll();
-            if(roles == null)
+            if(roles.Count() < 0)
                 return NotFound();
             return Ok(roles);
         }
@@ -27,6 +28,8 @@ namespace UserService.Controllers
         [HttpGet("{id:int}")]
         public ActionResult GetRoleById(int id)
         {
+            if(id < 0)
+                return BadRequest();
             var role = roleRepository.GetById(id);
             if (role == null)
                 return NotFound();
@@ -60,7 +63,7 @@ namespace UserService.Controllers
         [HttpPut]
         public ActionResult UpdateRole(int id, RoleCreateDTO role)
         {
-            if(id == null || role == null)
+            if(id <0 || role == null)
             {
                 return BadRequest();
             }
@@ -71,7 +74,7 @@ namespace UserService.Controllers
         [HttpDelete("{id}")]
         public IActionResult delete(int id)
         {
-            if(id == null)
+            if(id < 0)
             {
                 return BadRequest();
             }

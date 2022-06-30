@@ -6,6 +6,6 @@
     "\\UserService\\UserService\\Repositories",
     "\\UserService\\UserService\\Repositories\\Implementation"
   ],
-  "SelectedNode": "\\UserService\\UserService\\Repositories\\Implementation\\PersonalUserRepository.cs",
+  "SelectedNode": "\\UserService\\UserService\\Repositories\\Implementation\\CorporateUserRepository.cs",
   "PreviewInSolutionExplorer": false
 }

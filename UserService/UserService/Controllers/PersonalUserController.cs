@@ -22,7 +22,7 @@ namespace UserService.Controllers
         public ActionResult GetAll()
         {
             var personal = repository.GetAllPersonalUsers();
-            if(personal == null)
+            if(personal.Count() < 0)
                 return NotFound();
             return Ok(personal);
 
@@ -53,7 +53,7 @@ namespace UserService.Controllers
         [HttpPut]
         public ActionResult UpdatePersonal(int id, PersonalUserCreateDTO user)
         {
-            if (id == null || user == null)
+            if (id < 0 || user == null)
             {
                 return BadRequest();
             }
@@ -67,7 +67,7 @@ namespace UserService.Controllers
         [HttpDelete]
         public ActionResult DeletePersonalUser(int id)
         {
-            if (id == null)
+            if (id < 0)
             {
                 return BadRequest();
             }
@@ -115,7 +115,7 @@ namespace UserService.Controllers
         public ActionResult GetByContact(bool isActive)
         {
             var users = repository.GetPersonalUsersByActive(isActive);
-            if (users == null)
+            if (users.Count() < 0)
                 return NotFound();
             return Ok(users);
         }

@@ -44,7 +44,7 @@ namespace UserService.Repositories.Implementation
         public List<CorporateUserReadDTO> GetAllCorporateUsers()
         {
             var users = context.CorporateUsers.ToList();
-            if (users == null)
+            if (users.Count() < 0)
                 throw new AppException("No corporate users in database");
             var cUsersDTO = users.Select(u => new CorporateUserReadDTO
             {
@@ -172,7 +172,7 @@ namespace UserService.Repositories.Implementation
         public List<CorporateUserReadDTO> GetCorporateUsersByActive(bool isActive)
         {
             var users = context.CorporateUsers.Where(u => u.isActive == isActive).ToList();
-            if (users == null)
+            if (users.Count() < 0)
                 throw new AppException("No corprate users in database");
             var usersDTO = users.Select(u => new CorporateUserReadDTO
             {
@@ -223,6 +223,7 @@ namespace UserService.Repositories.Implementation
             bool user = context.Users.Any(u => u.Email == email);
             bool userP = context.PersonalUsers.Any(u => u.Email == email);
             bool userC = context.CorporateUsers.Any(u => u.Email == email);
+            //ovde dodaj &
             if (user || userP || userC)
                 return true;
             return false;
