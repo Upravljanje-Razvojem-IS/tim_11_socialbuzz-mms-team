@@ -1,8 +1,5 @@
 ﻿using ProductsAndServices.DTOs.ServiceDTOs;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ProductsAndServices.Interfaces
 {
@@ -10,13 +7,16 @@ namespace ProductsAndServices.Interfaces
     {
         List<ServiceReadDTO> GetAll();
 
-        ServiceReadDTO GetById(int id);
-
         ServiceCreateDTO CreateService(ServiceCreateDTO service);
         ServiceCreateDTO UpdateService(int id, ServiceCreateDTO service);
 
         void DeleteService(int id);
 
         //dodatne metode 
+        ServiceReadDTO GetById(int id);
+        ServiceReadDTO GetByName(string name);
+        ServiceReadDTO GetByDescription(string description);
+        ServiceReadDTO GetByPrice(double price);
+
     }
 }
