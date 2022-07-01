@@ -43,5 +43,66 @@ namespace ProductsAndServices.Controllers
             return Ok(new { message = "Uspesno obrisan servis!" });
         }
 
+        //dodatne Get metode
+        [HttpGet]
+        [Route("GetById/{id}")]
+        public ActionResult GetById(int id)
+        {
+            var service = repository.GetById(id);
+            if(service == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(service);
+            }
+        }
+
+        [HttpGet]
+        [Route("GetByName/{name}")]
+        public ActionResult GetByName(string name)
+        {
+            var service = repository.GetByName(name);
+            if(service == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(service);
+            }
+        }
+
+        [HttpGet]
+        [Route("GetByDescription/{description}")]
+        public ActionResult GetByDescription(string description)
+        {
+            var service = repository.GetByDescription(description);
+            if(service == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(service);
+            }
+        }
+
+        [HttpGet]
+        [Route("GetByPrice/{price}")]
+        public ActionResult GetByPrice(double price)
+        {
+            var service = repository.GetByPrice(price);
+            if(service == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(service);
+            }
+        }
+
     }
 }
