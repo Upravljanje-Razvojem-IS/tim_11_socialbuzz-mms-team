@@ -5,7 +5,6 @@ using ProductsAndServices.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace ProductsAndServices.Repositories
 {
@@ -44,18 +43,14 @@ namespace ProductsAndServices.Repositories
             context.SaveChanges();
         }
 
+        //metoda koja vraca sve servise
         public List<ServiceReadDTO> GetAll()
         {
             var service = context.Services.ToList();
             return mapper.Map<List<ServiceReadDTO>>(service);
         }
 
-        public ServiceReadDTO GetById(int id)
-        {
-            var service = context.Services.Find(id);
-            return mapper.Map<ServiceReadDTO>(service);
-        }
-
+        //metoda koja update-uje postojeci servis po id-ju
         public ServiceCreateDTO UpdateService(int id, ServiceCreateDTO serviceDTO)
         {
             var service = context.Services.Find(id);
@@ -70,6 +65,74 @@ namespace ProductsAndServices.Repositories
 
             context.SaveChanges();
             return serviceDTO;
+        }
+
+        //dodatne Get metode
+        //metoda koja vraca servis po id-ju
+        public ServiceReadDTO GetById(int id)
+        {
+            var service = context.Services.Find(id);
+            return mapper.Map<ServiceReadDTO>(service);
+        }
+
+        //metoda koja vraca servis po imenu
+        public ServiceReadDTO GetByName(string name)
+        {
+            var service = context.Services.FirstOrDefault(s => s.Name == name);
+            if(service == null)
+            {
+                throw new Exception("Service is not found!");
+            }
+
+            var serviceReadDTO = new ServiceReadDTO
+            {
+                Id = service.Id,
+                Name = service.Name,
+                Description = service.Description,
+                Price = service.Price
+            };
+
+            return serviceReadDTO;
+        }
+
+        //metoda koja vraca servis po opisu
+        public ServiceReadDTO GetByDescription(string description)
+        {
+            var service = context.Services.FirstOrDefault(s => s.Description == description);
+            if (service == null)
+            {
+                throw new Exception("Service is not found!");
+            }
+
+            var serviceReadDTO = new ServiceReadDTO
+            {
+                Id = service.Id,
+                Name = service.Name,
+                Description = service.Description,
+                Price = service.Price
+            };
+
+            return serviceReadDTO;
+        }
+
+        //metoda koja vraca servis po ceni
+        public ServiceReadDTO GetByPrice(double price)
+        {
+            var service = context.Services.FirstOrDefault(s => s.Price == price);
+            if (service == null)
+            {
+                throw new Exception("Service is not found!");
+            }
+
+            var serviceReadDTO = new ServiceReadDTO
+            {
+                Id = service.Id,
+                Name = service.Name,
+                Description = service.Description,
+                Price = service.Price
+            };
+
+            return serviceReadDTO;
         }
     }
 }

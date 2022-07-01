@@ -5,7 +5,6 @@ using ProductsAndServices.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace ProductsAndServices.Repositories
 {
@@ -31,6 +30,32 @@ namespace ProductsAndServices.Repositories
 
         }
 
+        //metoda koja vraca sve proizvode
+        public List<ProductReadDTO> GetAll()
+        {
+            var product = context.Products.ToList();
+            return mapper.Map<List<ProductReadDTO>>(product);
+
+        }
+
+        //metoda koja update-uje postojeci proizvod po id-ju
+        public ProductCreateDTO UpdateProduct(int id, ProductCreateDTO productDTO)
+        {
+            var product = context.Products.Find(id);
+            if (product == null)
+            {
+                throw new Exception("Nije pronadjen trazeni proizvod!");
+            }
+
+            product.Name = productDTO.Name;
+            product.Description = productDTO.Description;
+            product.Price = productDTO.Price;
+            product.Quantity = productDTO.Quantity;
+
+            context.SaveChanges();
+            return productDTO;
+        }
+
         //metoda DeleteProduct koja brise servis po id-ju
         public void DeleteProduct(int id)
         {
@@ -44,34 +69,100 @@ namespace ProductsAndServices.Repositories
             context.SaveChanges();
         }
 
-        public List<ProductReadDTO> GetAll()
-        {
-            var product = context.Products.ToList();
-            return mapper.Map<List<ProductReadDTO>>(product);
-            
-        }
-
+        //dodatne Get metode
+        //metoda koja vraca proizvod po id-ju
         public ProductReadDTO GetById(int id)
         {
             var product = context.Products.Find(id);
             return mapper.Map<ProductReadDTO>(product);
         }
 
-        public ProductCreateDTO UpdateProduct(int id, ProductCreateDTO productDTO)
+        //metoda koja vraca porizvod po imenu
+        public ProductReadDTO GetByName(string name)
         {
-            var product = context.Products.Find(id);
-            if(product == null )
+            var product = context.Products.FirstOrDefault(p => p.Name == name);
+            if(product == null)
             {
-                throw new Exception("Nije pronadjen trazeni proizvod!");
+                throw new Exception("Product is not found!");
             }
 
-            product.Name = productDTO.Name;
-            product.Description = productDTO.Description;
-            product.Price = productDTO.Price;
-            product.Quantity = productDTO.Quantity;
+            var productReadDTO = new ProductReadDTO 
+            { 
+                Id = product.Id,
+                Name = product.Name,
+                Description = product.Description,
+                Quantity = product.Quantity,
+                Price = product.Price
+            };
 
-            context.SaveChanges();
-            return productDTO;
+            return productReadDTO;
+        }
+
+        //metoda koja vraca proizvod po opisu
+        public ProductReadDTO GetByDescription( string description)
+        {
+            var product = context.Products.FirstOrDefault(p => p.Description == description);
+
+            if(product == null)
+            {
+                throw new Exception("Product is not found!");
+            }
+
+            var productReadDTO = new ProductReadDTO 
+            { 
+                Id = product.Id,
+                Name = product.Name,
+                Description = product.Description,
+                Quantity = product.Quantity,
+                Price = product.Price
+            };
+
+            return productReadDTO;
+        }
+
+        //metoda koja vraca proizvod po kolicini proizvoda
+        public ProductReadDTO GetByQuantity (int quantity)
+        {
+            var product = context.Products.FirstOrDefault(p => p.Quantity == quantity);
+
+            if (product == null)
+            {
+                throw new Exception("Product is not found!");
+            }
+
+            var productReadDTO = new ProductReadDTO 
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Description = product.Description,
+                Quantity = product.Quantity,
+                Price = product.Price
+            };
+            
+            return productReadDTO;
+        }
+
+        //metoda koja vraca proizvod po ceni porizvoda
+        public ProductReadDTO GetByPrice(double price)
+        {
+            var product = context.Products.FirstOrDefault(p => p.Price == price);
+
+            if (product == null)
+            {
+                throw new Exception("Product is not found!");
+            }
+
+            var productReadDTO = new ProductReadDTO 
+            { 
+                Id = product.Id,
+                Name = product.Name,
+                Description = product.Description,
+                Quantity = product.Quantity,
+                Price = product.Price
+            };
+
+            return productReadDTO;
+        
         }
     }
 }
