@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace ProductsAndServices.Entities
 {
     public class MockForUser
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
@@ -19,6 +16,7 @@ namespace ProductsAndServices.Entities
         public static List<MockForUser> Users = new List<MockForUser>(){
             new MockForUser()
             {
+                Id = 1,
                 FirstName = "Lazar",
                 LastName = "Lazarevic",
                 Email = "laza.lazarevic@gmail.com"
@@ -26,6 +24,7 @@ namespace ProductsAndServices.Entities
 
             new MockForUser()
             {
+                Id = 2,
                 FirstName = "Milos",
                 LastName = "Milosevic",
                 Email = "milos.milosevic@yahoo.com"
