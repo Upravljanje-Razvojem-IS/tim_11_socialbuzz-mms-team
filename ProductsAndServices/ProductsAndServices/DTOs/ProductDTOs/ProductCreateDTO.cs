@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace ProductsAndServices.DTOs.ProductDTOs
+﻿namespace ProductsAndServices.DTOs.ProductDTOs
 {
     public class ProductCreateDTO
     {
@@ -14,5 +9,7 @@ namespace ProductsAndServices.DTOs.ProductDTOs
         public int Quantity { get; set; }
 
         public double Price { get; set; }
+
+        public int ProductTypeID { get; set; }
     }
 }
