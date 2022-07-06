@@ -7,7 +7,7 @@ namespace ProductsAndServices.Interfaces
     {
         List<ProductTypeReadDTO> GetAllProductTypes();
         ProductTypeCreateDTO CreateProductType(ProductTypeCreateDTO productTypeCreateDTO);
-        ProductTypeReadDTO UpdateProductType(int id, ProductTypeCreateDTO productTypeCreateDTO);
+        ProductTypeCreateDTO UpdateProductType(int id, ProductTypeCreateDTO productTypeCreateDTO);
 
         void DeleteProductType(int id);
         ProductTypeReadDTO GetById(int id);
