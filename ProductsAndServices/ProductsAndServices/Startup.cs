@@ -40,7 +40,9 @@ namespace ProductsAndServices
 
             services.AddScoped<IServiceRepository, ServiceRepository>();
 
+            services.AddScoped<IProductTypeRepository, ProductTypeRepository>();
 
+            services.AddScoped<IServiceTypeRepository, ServiceTypeRepository>();
         }
 
 
