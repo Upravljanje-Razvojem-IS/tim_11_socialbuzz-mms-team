@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using ProductsAndServices.DTOs.ProductDTOs;
 using ProductsAndServices.Entities;
+using ProductsAndServices.Exceptions;
 using ProductsAndServices.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -33,8 +34,25 @@ namespace ProductsAndServices.Repositories
         //metoda koja vraca sve proizvode
         public List<ProductReadDTO> GetAll()
         {
+            //var product = context.Products.ToList();
+            //return mapper.Map<List<ProductReadDTO>>(product);
+
             var product = context.Products.ToList();
-            return mapper.Map<List<ProductReadDTO>>(product);
+            if(product.Count() < 0)
+            {
+                throw new AppException("No products in database!");
+            }
+            var productDTO = product.Select(p => new ProductReadDTO
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Description = p.Description,
+                Price = p.Price,
+                Quantity = p.Quantity,
+                ProductType = context.ProductTypes.Find(p.ProductTypeID).Description
+            }).ToList();
+
+            return productDTO;
 
         }
 
@@ -51,7 +69,9 @@ namespace ProductsAndServices.Repositories
             product.Description = productDTO.Description;
             product.Price = productDTO.Price;
             product.Quantity = productDTO.Quantity;
+            product.ProductTypeID = 1;
 
+            context.Products.Update(product);
             context.SaveChanges();
             return productDTO;
         }
