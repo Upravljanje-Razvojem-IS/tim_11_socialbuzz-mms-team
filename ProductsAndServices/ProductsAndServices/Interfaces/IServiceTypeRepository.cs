@@ -3,14 +3,14 @@ using System.Collections.Generic;
 
 namespace ProductsAndServices.Interfaces
 {
-    interface IServiceTypeRepository
+    public interface IServiceTypeRepository
     {
         List<ServiceTypeReadDTO> GetAllServiceTypes();
 
         ServiceTypeCreateDTO CreateServiceType(ServiceTypeCreateDTO serviceTypeCreateDTO);
         ServiceTypeCreateDTO UpdateServiceType(int id, ServiceTypeCreateDTO serviceTypeCreateDTO);
 
-        void DeleteProductType(int id);
+        void DeleteServiceType(int id);
 
         ServiceTypeReadDTO GetById(int id);
 
