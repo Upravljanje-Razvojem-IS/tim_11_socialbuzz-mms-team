@@ -20,7 +20,7 @@ namespace UserContentService.Repositories.impl
         {
             var ad = new Ad();
             if (!CheckIfUserExists(adCreate.UserId))
-                throw new System.Exception("user doesnt exists, foreign key violation");
+                throw new System.Exception("user doesnt exists, foreign key violation!");
             ad.UserId = adCreate.UserId;
             ad.Text = adCreate.Text;
             ad.Title = adCreate.Title;
