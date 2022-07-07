@@ -9,6 +9,8 @@ using ProductsAndServices.Entities;
 using System;
 using ProductsAndServices.Interfaces;
 using ProductsAndServices.Repositories;
+using System.Reflection;
+using System.IO;
 
 namespace ProductsAndServices
 {
@@ -29,6 +31,23 @@ namespace ProductsAndServices
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddControllers();
+
+            //services.AddEndpointsApiExplorer();
+            services.AddSwaggerGen(setupAction => 
+            {
+                setupAction.SwaggerDoc("ProductsAndServicesOpenApiSpecification", 
+                    new Microsoft.OpenApi.Models.OpenApiInfo() 
+                    { 
+                        Title = "Products and services Open API",
+                        Version = "1"
+                    });
+
+                var xmlComments = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlCommentsPath = Path.Combine(AppContext.BaseDirectory, xmlComments);
+
+                setupAction.IncludeXmlComments(xmlCommentsPath);
+            });
+
             services.AddDbContext<DataContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddSwaggerGen(c =>
@@ -54,10 +73,16 @@ namespace ProductsAndServices
             {
                 app.UseDeveloperExceptionPage();
                 
+                //app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ProductsAndServices"));
+
             }
 
             app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ProductsAndServices"));
+            app.UseSwaggerUI(setupAction => 
+            {
+                setupAction.SwaggerEndpoint("/swagger/ProductsAndServicesOpenApiSpecification/swagger.json", "Products and services Open API");
+                //setupAction.RoutePrefix = "";
+            });
 
             app.UseHttpsRedirection();
 

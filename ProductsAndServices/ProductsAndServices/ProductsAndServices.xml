@@ -1,0 +1,523 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ProductsAndServices</name>
+    </assembly>
+    <members>
+        <member name="M:ProductsAndServices.Controllers.ProductController.GetAll">
+            <summary>
+            Get all products
+            </summary>
+            <returns>List of products</returns>
+        </member>
+        <member name="M:ProductsAndServices.Controllers.ProductController.PostProduct(ProductsAndServices.DTOs.ProductDTOs.ProductCreateDTO)">
+            <summary>
+            Create a new product
+            </summary>
+            <param name="productDTO">Name of product</param>
+            <returns>Created product</returns>
+        </member>
+        <member name="M:ProductsAndServices.Controllers.ProductController.PutProduct(System.Int32,ProductsAndServices.DTOs.ProductDTOs.ProductCreateDTO)">
+            <summary>
+            Update a product
+            </summary>
+            <param name="id">Id of product</param>
+            <param name="productDTO">Name of product</param>
+            <returns>Updated product</returns>
+        </member>
+        <member name="M:ProductsAndServices.Controllers.ProductController.DeleteProduct(System.Int32)">
+            <summary>
+            Delete a product
+            </summary>
+            <param name="id">Id of product</param>
+            <returns>Deleted product</returns>
+        </member>
+        <member name="M:ProductsAndServices.Controllers.ProductController.GetById(System.Int32)">
+            <summary>
+            Get single product based on id
+            </summary>
+            <param name="id">Id of product</param>
+            <returns>List of products or single product</returns>
+        </member>
+        <member name="M:ProductsAndServices.Controllers.ProductController.GetByName(System.String)">
+            <summary>
+            Get product with this name
+            </summary>
+            <param name="name">Name of product</param>
+            <returns>Single name of product or return a list of these products with this name</returns>
+        </member>
+        <member name="M:ProductsAndServices.Controllers.ProductController.GetByDescription(System.String)">
+            <summary>
+            Get product with this description
+            </summary>
+            <param name="description">Description of product</param>
+            <returns>Single description of product or return a list of these products with this description</returns>
+        </member>
+        <member name="M:ProductsAndServices.Controllers.ProductController.GetByQuantity(System.Int32)">
+            <summary>
+            Get product with this quantity
+            </summary>
+            <param name="quantity">Quantity of product</param>
+            <returns>Quantity of products or return a list of these products with this quantity</returns>
+        </member>
+        <member name="M:ProductsAndServices.Controllers.ProductController.GetByPrice(System.Double)">
+            <summary>
+            Get product with this price   
+            </summary>
+            <param name="price">Price of product</param>
+            <returns>Single or multiple products with this price</returns>
+        </member>
+        <member name="M:ProductsAndServices.Controllers.ProductTypeController.#ctor(ProductsAndServices.Interfaces.IProductTypeRepository)">
+            <summary>
+            Constructor with one param
+            </summary>
+            <param name="repository">ProductTypeRepository param</param>
+        </member>
+        <member name="M:ProductsAndServices.Controllers.ProductTypeController.GetAll">
+            <summary>
+            Get all product types
+            </summary>
+            <returns>List of product types</returns>
+        </member>
+        <member name="M:ProductsAndServices.Controllers.ProductTypeController.CreateProductType(ProductsAndServices.DTOs.ProductTypeDTOs.ProductTypeCreateDTO)">
+            <summary>
+            Create a new product type
+            </summary>
+            <param name="productType">Name of product</param>
+            <returns>Created product type</returns>
+        </member>
+        <member name="M:ProductsAndServices.Controllers.ProductTypeController.UpdateProductType(System.Int32,ProductsAndServices.DTOs.ProductTypeDTOs.ProductTypeCreateDTO)">
+            <summary>
+            Update a product type
+            </summary>
+            <param name="id">Id of product type</param>
+            <param name="productTypeCreateDTO">Name of product type</param>
+            <returns>Updated product type</returns>
+        </member>
+        <member name="M:ProductsAndServices.Controllers.ProductTypeController.DeleteProductType(System.Int32)">
+            <summary>
+            Delete a product type
+            </summary>
+            <param name="id">Id of product type</param>
+            <returns>Deleted product type</returns>
+        </member>
+        <member name="M:ProductsAndServices.Controllers.ProductTypeController.GetById(System.Int32)">
+            <summary>
+            Get single product type based on id
+            </summary>
+            <param name="id">Id of product type</param>
+            <returns>Single product type</returns>
+        </member>
+        <member name="M:ProductsAndServices.Controllers.ProductTypeController.GetByDescription(System.String)">
+            <summary>
+            Get product type with this description
+            </summary>
+            <param name="description">Description of product type</param>
+            <returns>Single description of product type or return a list of these product types with this description</returns>
+        </member>
+        <member name="M:ProductsAndServices.Controllers.ServiceController.GetAll">
+            <summary>
+            Get all services
+            </summary>
+            <returns>List of services</returns>
+        </member>
+        <member name="M:ProductsAndServices.Controllers.ServiceController.PostService(ProductsAndServices.DTOs.ServiceDTOs.ServiceCreateDTO)">
+            <summary>
+            Create a new service
+            </summary>
+            <param name="serviceDTO">Name of service</param>
+            <returns>Created service</returns>
+        </member>
+        <member name="M:ProductsAndServices.Controllers.ServiceController.PutService(System.Int32,ProductsAndServices.DTOs.ServiceDTOs.ServiceCreateDTO)">
+            <summary>
+            Update a service
+            </summary>
+            <param name="id">Id of service</param>
+            <param name="serviceDTO">Name of service</param>
+            <returns>Updated service</returns>
+        </member>
+        <member name="M:ProductsAndServices.Controllers.ServiceController.DeleteService(System.Int32)">
+            <summary>
+            Delete a service
+            </summary>
+            <param name="id">Id of service</param>
+            <returns>Deleted service</returns>
+        </member>
+        <member name="M:ProductsAndServices.Controllers.ServiceController.GetById(System.Int32)">
+            <summary>
+            Get single service based on id
+            </summary>
+            <param name="id">Id of service</param>
+            <returns>List of services or single product</returns>
+        </member>
+        <member name="M:ProductsAndServices.Controllers.ServiceController.GetByName(System.String)">
+            <summary>
+            Get service with this name
+            </summary>
+            <param name="name">Name of service</param>
+            <returns>Single name of service or return a list of these services with this name</returns>
+        </member>
+        <member name="M:ProductsAndServices.Controllers.ServiceController.GetByDescription(System.String)">
+            <summary>
+            Get service with this description
+            </summary>
+            <param name="description">Description of service</param>
+            <returns>Single description of service or return a list of these services with this description</returns>
+        </member>
+        <member name="M:ProductsAndServices.Controllers.ServiceController.GetByPrice(System.Double)">
+            <summary>
+            Get service with this price
+            </summary>
+            <param name="price">Price of service</param>
+            <returns>Single service or multiple products with this price</returns>
+        </member>
+        <member name="M:ProductsAndServices.Controllers.ServiceTypeController.#ctor(ProductsAndServices.Interfaces.IServiceTypeRepository)">
+            <summary>
+            Constructor with one param
+            </summary>
+            <param name="repository">ServiceTypeRepository param</param>
+        </member>
+        <member name="M:ProductsAndServices.Controllers.ServiceTypeController.GetAll">
+            <summary>
+            Get all service types
+            </summary>
+            <returns>List of service types</returns>
+        </member>
+        <member name="M:ProductsAndServices.Controllers.ServiceTypeController.CreateServiceType(ProductsAndServices.DTOs.ServiceTypeDTOs.ServiceTypeCreateDTO)">
+            <summary>
+            Create a new service type
+            </summary>
+            <param name="serviceType">Name of service</param>
+            <returns>Created service type</returns>
+        </member>
+        <member name="M:ProductsAndServices.Controllers.ServiceTypeController.UpdateServiceType(System.Int32,ProductsAndServices.DTOs.ServiceTypeDTOs.ServiceTypeCreateDTO)">
+            <summary>
+            Update a service type
+            </summary>
+            <param name="id">Id of service type</param>
+            <param name="serviceTypeCreateDTO">Name of service type</param>
+            <returns>Updated service type</returns>
+        </member>
+        <member name="M:ProductsAndServices.Controllers.ServiceTypeController.DeleteServiceType(System.Int32)">
+            <summary>
+            Delete a service type
+            </summary>
+            <param name="id">Id of service type</param>
+            <returns>Deleted service type</returns>
+        </member>
+        <member name="M:ProductsAndServices.Controllers.ServiceTypeController.GetById(System.Int32)">
+            <summary>
+            Get single service type based on id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductsAndServices.Controllers.ServiceTypeController.GetByDescription(System.String)">
+            <summary>
+            Get service type with this description
+            </summary>
+            <param name="description">Description of service type</param>
+            <returns>Single description of service type or return a list of these service types with this description</returns>
+        </member>
+        <member name="T:ProductsAndServices.DTOs.ProductDTOs.ProductCreateDTO">
+            <summary>
+            Represents the product model
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.DTOs.ProductDTOs.ProductCreateDTO.Name">
+            <summary>
+            Product dto name
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.DTOs.ProductDTOs.ProductCreateDTO.Description">
+            <summary>
+            Product dto description
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.DTOs.ProductDTOs.ProductCreateDTO.Quantity">
+            <summary>
+            Product dto quantity
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.DTOs.ProductDTOs.ProductCreateDTO.Price">
+            <summary>
+            Product dto price
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.DTOs.ProductDTOs.ProductCreateDTO.ProductTypeID">
+            <summary>
+            Product dto foreign key product type
+            </summary>
+        </member>
+        <member name="T:ProductsAndServices.DTOs.ProductDTOs.ProductReadDTO">
+            <summary>
+            Represents the product model
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.DTOs.ProductDTOs.ProductReadDTO.Id">
+            <summary>
+            Product Id
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.DTOs.ProductDTOs.ProductReadDTO.Name">
+            <summary>
+            Product name
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.DTOs.ProductDTOs.ProductReadDTO.Description">
+            <summary>
+            Product description
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.DTOs.ProductDTOs.ProductReadDTO.Quantity">
+            <summary>
+            Product quantity
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.DTOs.ProductDTOs.ProductReadDTO.Price">
+            <summary>
+            Product price
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.DTOs.ProductDTOs.ProductReadDTO.ProductType">
+            <summary>
+            Product type
+            </summary>
+        </member>
+        <member name="T:ProductsAndServices.DTOs.ProductTypeDTOs.ProductTypeCreateDTO">
+            <summary>
+            Represents the product type model
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.DTOs.ProductTypeDTOs.ProductTypeCreateDTO.Description">
+            <summary>
+            Product type dto description 
+            </summary>
+        </member>
+        <member name="T:ProductsAndServices.DTOs.ProductTypeDTOs.ProductTypeReadDTO">
+            <summary>
+            Represents the product type model
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.DTOs.ProductTypeDTOs.ProductTypeReadDTO.Id">
+            <summary>
+            Product type Id
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.DTOs.ProductTypeDTOs.ProductTypeReadDTO.Description">
+            <summary>
+            Product type description
+            </summary>
+        </member>
+        <member name="T:ProductsAndServices.DTOs.ServiceDTOs.ServiceCreateDTO">
+            <summary>
+            Represents the service model
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.DTOs.ServiceDTOs.ServiceCreateDTO.Name">
+            <summary>
+            Service dto name
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.DTOs.ServiceDTOs.ServiceCreateDTO.Description">
+            <summary>
+            Service dto description
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.DTOs.ServiceDTOs.ServiceCreateDTO.Price">
+            <summary>
+            Service dto price
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.DTOs.ServiceDTOs.ServiceCreateDTO.ServiceTypeID">
+            <summary>
+            Service dto foreign key service type
+            </summary>
+        </member>
+        <member name="T:ProductsAndServices.DTOs.ServiceDTOs.ServiceReadDTO">
+            <summary>
+            Represents the service model
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.DTOs.ServiceDTOs.ServiceReadDTO.Id">
+            <summary>
+            Service Id
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.DTOs.ServiceDTOs.ServiceReadDTO.Name">
+            <summary>
+            Service name
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.DTOs.ServiceDTOs.ServiceReadDTO.Description">
+            <summary>
+            Service description
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.DTOs.ServiceDTOs.ServiceReadDTO.Price">
+            <summary>
+            Service price
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.DTOs.ServiceDTOs.ServiceReadDTO.ServiceType">
+            <summary>
+            Service type
+            </summary>
+        </member>
+        <member name="T:ProductsAndServices.DTOs.ServiceTypeDTOs.ServiceTypeCreateDTO">
+            <summary>
+            Represents the service type model
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.DTOs.ServiceTypeDTOs.ServiceTypeCreateDTO.Description">
+            <summary>
+            Service type dto description
+            </summary>
+        </member>
+        <member name="T:ProductsAndServices.DTOs.ServiceTypeDTOs.ServiceTypeReadDTO">
+            <summary>
+            Represents the service type model
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.DTOs.ServiceTypeDTOs.ServiceTypeReadDTO.Id">
+            <summary>
+            Service type Id
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.DTOs.ServiceTypeDTOs.ServiceTypeReadDTO.Description">
+            <summary>
+            Service type description
+            </summary>
+        </member>
+        <member name="T:ProductsAndServices.Entities.MockForUser">
+            <summary>
+            Mock For User model
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.Entities.MockForUser.Id">
+            <summary>
+            Id of mock user
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.Entities.MockForUser.FirstName">
+            <summary>
+            First name of mock user
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.Entities.MockForUser.LastName">
+            <summary>
+            Last name of mock user
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.Entities.MockForUser.Email">
+            <summary>
+            Email of mock user
+            </summary>
+        </member>
+        <member name="T:ProductsAndServices.Entities.Product">
+            <summary>
+            Product model
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.Entities.Product.Id">
+            <summary>
+            Product Id
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.Entities.Product.Name">
+            <summary>
+            Product name
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.Entities.Product.Description">
+            <summary>
+            Product description
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.Entities.Product.Quantity">
+            <summary>
+            Product quantity
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.Entities.Product.Price">
+            <summary>
+            Product price
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.Entities.Product.ProductTypeID">
+            <summary>
+            Foreign key of product type
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.Entities.Product.ProductType">
+            <summary>
+            Product type
+            </summary>
+        </member>
+        <member name="T:ProductsAndServices.Entities.ProductType">
+            <summary>
+            Product Type model
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.Entities.ProductType.ProductTypeID">
+            <summary>
+            Product type id
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.Entities.ProductType.Description">
+            <summary>
+            Product type description
+            </summary>
+        </member>
+        <member name="T:ProductsAndServices.Entities.Service">
+            <summary>
+            Service model
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.Entities.Service.Id">
+            <summary>
+            Service Id
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.Entities.Service.Name">
+            <summary>
+            Service name
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.Entities.Service.Description">
+            <summary>
+            Service description
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.Entities.Service.Price">
+            <summary>
+            Service price
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.Entities.Service.ServiceTypeID">
+            <summary>
+            Foreign key of service type
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.Entities.Service.ServiceType">
+            <summary>
+            Service type
+            </summary>
+        </member>
+        <member name="T:ProductsAndServices.Entities.ServiceType">
+            <summary>
+            Service Type model
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.Entities.ServiceType.ServiceTypeID">
+            <summary>
+            Service type id
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.Entities.ServiceType.Description">
+            <summary>
+            Service type description
+            </summary>
+        </member>
+    </members>
+</doc>
