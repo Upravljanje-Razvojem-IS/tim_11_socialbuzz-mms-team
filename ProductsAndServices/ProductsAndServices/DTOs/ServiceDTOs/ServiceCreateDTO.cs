@@ -24,5 +24,10 @@
         /// Service dto foreign key service type
         /// </summary>
         public int ServiceTypeID { get; set; }
+
+        /// <summary>
+        /// Product dto goreign key of mock user
+        /// </summary>
+        public int MockUserId { get; set; }
     }
 }
