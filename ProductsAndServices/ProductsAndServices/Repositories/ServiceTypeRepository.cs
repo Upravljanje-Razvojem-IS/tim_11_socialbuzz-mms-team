@@ -35,7 +35,7 @@ namespace ProductsAndServices.Repositories
         public ServiceTypeCreateDTO UpdateServiceType(int id, ServiceTypeCreateDTO serviceTypeCreateDTO)
         {
             var serviceTypeEf = context.ServiceTypes.Find(id);
-            if(serviceTypeEf == null)
+            if (serviceTypeEf == null)
             {
                 throw new Exceptions.KeyNotFoundException("Service type is not found!");
             }
@@ -75,18 +75,17 @@ namespace ProductsAndServices.Repositories
             return serviceTypeDTO;
         }
 
-        //dodatne Get metode
         public ServiceTypeReadDTO GetById(int id)
         {
             var serviceType = context.ServiceTypes.Find(id);
-            if(serviceType == null)
+            if (serviceType == null)
             {
                 throw new Exceptions.KeyNotFoundException("Service type is not found!");
             }
             var serviceTypeReadDTO = new ServiceTypeReadDTO();
             serviceTypeReadDTO.Id = id;
             serviceTypeReadDTO.Description = serviceType.Description;
-            serviceTypeReadDTO.Description = context.ServiceTypes.Find(serviceType.ServiceTypeID).Description;
+            //serviceTypeReadDTO.Description = context.ServiceTypes.Find(serviceType.ServiceTypeID).Description;
 
             return serviceTypeReadDTO;
         }
@@ -94,7 +93,7 @@ namespace ProductsAndServices.Repositories
         public List<ServiceTypeReadDTO> GetByDescription(string description)
         {
             var serviceType = context.ServiceTypes.Where(st => st.Description == description).ToList();
-            if(serviceType == null)
+            if (serviceType == null)
             {
                 throw new Exceptions.AppException("No service type in database!");
             }
@@ -106,8 +105,10 @@ namespace ProductsAndServices.Repositories
             }).ToList();
 
             return serviceTypeReadDTO;
+
         }
 
+        
     }
 
 }

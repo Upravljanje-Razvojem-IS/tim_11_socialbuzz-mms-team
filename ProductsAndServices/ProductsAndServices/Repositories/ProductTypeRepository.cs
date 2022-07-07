@@ -86,7 +86,7 @@ namespace ProductsAndServices.Repositories
             var productTypeReadDTO = new ProductTypeReadDTO();
             productTypeReadDTO.Id = id;
             productTypeReadDTO.Description = productType.Description;
-            productTypeReadDTO.Description = context.ProductTypes.Find(productType.ProductTypeID).Description;
+            //productTypeReadDTO.Description = context.ProductTypes.Find(productType.ProductTypeID).Description;
 
             return productTypeReadDTO;
         }
