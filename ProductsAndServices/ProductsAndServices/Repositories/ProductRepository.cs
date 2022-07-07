@@ -14,29 +14,48 @@ namespace ProductsAndServices.Repositories
         //deklaracija parametara koji se prosledjuju konstruktoru
         private readonly DataContext context;
         private readonly IMapper mapper;
+        private readonly IProductTypeRepository productTypeRepository;
 
         //konstruktor sa parametrima klase ProductRepository
-        public ProductRepository(DataContext context, IMapper mapper)
+        public ProductRepository(DataContext context, IMapper mapper, IProductTypeRepository productTypeRepository)
         {
             this.context = context;
             this.mapper = mapper;
+            this.productTypeRepository = productTypeRepository;
         }
+        //ZAVRSENA METODA
         //metoda CreateProduct koja dodaje nov proizvod
         public ProductCreateDTO CreateProduct(ProductCreateDTO product)
         {
-            var productEf = mapper.Map<Product>(product);
+            /*var productEf = mapper.Map<Product>(product);
             context.Products.Add(productEf);
             context.SaveChanges();
+            return product;*/
+
+            var productEf = new Product();
+            if (!CheckProductTypeExists(product.ProductTypeID))
+            {
+                throw new System.Exception("Foreign key violation!");
+            }
+
+            productEf.Name = product.Name;
+            productEf.Description = product.Description;
+            productEf.Price = product.Price;
+            productEf.Quantity = product.Quantity;
+            productEf.ProductTypeID = product.ProductTypeID;
+
+            context.Products.Add(productEf);
+            context.SaveChanges();
+
             return product;
 
         }
 
+        //ZAVRSENA METODA
         //metoda koja vraca sve proizvode
         public List<ProductReadDTO> GetAll()
         {
-            //var product = context.Products.ToList();
-            //return mapper.Map<List<ProductReadDTO>>(product);
-
+            
             var product = context.Products.ToList();
             if(product.Count() < 0)
             {
@@ -47,9 +66,9 @@ namespace ProductsAndServices.Repositories
                 Id = p.Id,
                 Name = p.Name,
                 Description = p.Description,
-                Price = p.Price,
                 Quantity = p.Quantity,
-                ProductType = context.ProductTypes.Find(p.ProductTypeID).Description
+                Price = p.Price,
+                ProductType = productTypeRepository.GetById(p.ProductTypeID)
             }).ToList();
 
             return productDTO;
@@ -57,19 +76,24 @@ namespace ProductsAndServices.Repositories
         }
 
         //metoda koja update-uje postojeci proizvod po id-ju
+        //ZAVRSENA METODA
         public ProductCreateDTO UpdateProduct(int id, ProductCreateDTO productDTO)
         {
             var product = context.Products.Find(id);
             if (product == null)
             {
-                throw new Exception("Nije pronadjen trazeni proizvod!");
+                throw new Exception("Not found!");
+            }
+            if (!CheckProductTypeExists(product.ProductTypeID))
+            {
+                throw new System.Exception("Foreign key exception!");
             }
 
             product.Name = productDTO.Name;
             product.Description = productDTO.Description;
             product.Price = productDTO.Price;
             product.Quantity = productDTO.Quantity;
-            product.ProductTypeID = 1;
+            product.ProductTypeID = productDTO.ProductTypeID;
 
             context.Products.Update(product);
             context.SaveChanges();
@@ -77,10 +101,12 @@ namespace ProductsAndServices.Repositories
         }
 
         //metoda DeleteProduct koja brise servis po id-ju
+        //ZAVRSENA METODA
         public void DeleteProduct(int id)
         {
             var product = context.Products.FirstOrDefault(p => p.Id == id);
-            if(product == null)
+            //var product = context.Products.Find(id);
+            if (product == null)
             {
                 throw new Exception("Nije moguce obrisati!");
             }
@@ -91,98 +117,130 @@ namespace ProductsAndServices.Repositories
 
         //dodatne Get metode
         //metoda koja vraca proizvod po id-ju
+        //ZAVRSENA METODA
         public ProductReadDTO GetById(int id)
         {
             var product = context.Products.Find(id);
-            return mapper.Map<ProductReadDTO>(product);
+          
+            if(product == null)
+            {
+                throw new System.Exception("Product not found!");
+            }
+
+            var productDTO = new ProductReadDTO();
+            productDTO.Id = product.Id;
+            productDTO.Name = product.Name;
+            productDTO.Description = product.Description;
+            productDTO.Price = product.Price;
+            productDTO.Quantity = product.Quantity;
+            productDTO.ProductType = productTypeRepository.GetById(product.ProductTypeID);
+
+            return productDTO;
         }
 
         //metoda koja vraca porizvod po imenu
-        public ProductReadDTO GetByName(string name)
+        //ZAVRSENA METODA
+        List<ProductReadDTO> IProductRepository.GetByName(string name)
         {
-            var product = context.Products.FirstOrDefault(p => p.Name == name);
-            if(product == null)
+            var product = context.Products.Where(p => p.Name == name).ToList();
+
+            if (product.Count() < 0)
             {
-                throw new Exception("Product is not found!");
+                throw new AppException("No products in database!");
             }
 
-            var productReadDTO = new ProductReadDTO 
-            { 
-                Id = product.Id,
-                Name = product.Name,
-                Description = product.Description,
-                Quantity = product.Quantity,
-                Price = product.Price
-            };
+            var productDTO = product.Select(p => new ProductReadDTO
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Description = p.Description,
+                Quantity = p.Quantity,
+                Price = p.Price,
+                ProductType = productTypeRepository.GetById(p.ProductTypeID)
+            }).ToList();
 
-            return productReadDTO;
+            
+            return productDTO;
         }
 
         //metoda koja vraca proizvod po opisu
-        public ProductReadDTO GetByDescription( string description)
+        //ZAVRSENA METODA
+        List<ProductReadDTO> IProductRepository.GetByDescription(string description)
         {
-            var product = context.Products.FirstOrDefault(p => p.Description == description);
+            var product = context.Products.Where(p => p.Description == description).ToList();
 
-            if(product == null)
+            if (product.Count() < 0)
             {
-                throw new Exception("Product is not found!");
+                throw new AppException("No products in database!");
             }
 
-            var productReadDTO = new ProductReadDTO 
-            { 
-                Id = product.Id,
-                Name = product.Name,
-                Description = product.Description,
-                Quantity = product.Quantity,
-                Price = product.Price
-            };
+            var productReadDTO = product.Select(p => new ProductReadDTO
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Description = p.Description,
+                Quantity = p.Quantity,
+                Price = p.Price,
+                ProductType = productTypeRepository.GetById(p.ProductTypeID)
+            }).ToList();
 
             return productReadDTO;
         }
+
+        
 
         //metoda koja vraca proizvod po kolicini proizvoda
-        public ProductReadDTO GetByQuantity (int quantity)
+        List<ProductReadDTO> IProductRepository.GetByQuantity(int quantity)
         {
-            var product = context.Products.FirstOrDefault(p => p.Quantity == quantity);
+            var product = context.Products.Where(p => p.Quantity == quantity).ToList();
 
-            if (product == null)
+            if (product.Count < 0)
             {
-                throw new Exception("Product is not found!");
+                throw new AppException("No services in database!");
             }
 
-            var productReadDTO = new ProductReadDTO 
+            var productReadDTO = product.Select(p => new ProductReadDTO
             {
-                Id = product.Id,
-                Name = product.Name,
-                Description = product.Description,
-                Quantity = product.Quantity,
-                Price = product.Price
-            };
-            
+                Id = p.Id,
+                Name = p.Name,
+                Description = p.Description,
+                Quantity = p.Quantity,
+                Price = p.Price,
+                ProductType = productTypeRepository.GetById(p.ProductTypeID)
+            }).ToList();
+
             return productReadDTO;
         }
 
-        //metoda koja vraca proizvod po ceni porizvoda
-        public ProductReadDTO GetByPrice(double price)
+        //metoda koja vraca listu proizvoda po ceni porizvoda
+        List<ProductReadDTO> IProductRepository.GetByPrice(double price)
         {
-            var product = context.Products.FirstOrDefault(p => p.Price == price);
+            var product = context.Products.Where(p => p.Price == price).ToList();
 
-            if (product == null)
+            if (product.Count < 0)
             {
-                throw new Exception("Product is not found!");
+                throw new AppException("No services in database!");
             }
 
-            var productReadDTO = new ProductReadDTO 
-            { 
-                Id = product.Id,
-                Name = product.Name,
-                Description = product.Description,
-                Quantity = product.Quantity,
-                Price = product.Price
-            };
+            var productReadDTO = product.Select(p => new ProductReadDTO
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Description = p.Description,
+                Quantity = p.Quantity,
+                Price = p.Price,
+                ProductType = productTypeRepository.GetById(p.ProductTypeID)
+            }).ToList();
 
             return productReadDTO;
-        
         }
+
+
+        //metoda za validaciju ID-ja
+        private bool CheckProductTypeExists(int id)
+        {
+            return context.ProductTypes.Any(pt => pt.ProductTypeID == id);
+        }
+
     }
 }
