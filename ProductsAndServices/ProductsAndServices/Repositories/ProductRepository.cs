@@ -27,10 +27,7 @@ namespace ProductsAndServices.Repositories
         //metoda CreateProduct koja dodaje nov proizvod
         public ProductCreateDTO CreateProduct(ProductCreateDTO product)
         {
-            /*var productEf = mapper.Map<Product>(product);
-            context.Products.Add(productEf);
-            context.SaveChanges();
-            return product;*/
+         
 
             var productEf = new Product();
             if (!CheckProductTypeExists(product.ProductTypeID))
@@ -43,6 +40,7 @@ namespace ProductsAndServices.Repositories
             productEf.Price = product.Price;
             productEf.Quantity = product.Quantity;
             productEf.ProductTypeID = product.ProductTypeID;
+            productEf.MockUserId = product.MockUserId;
 
             context.Products.Add(productEf);
             context.SaveChanges();
@@ -68,7 +66,8 @@ namespace ProductsAndServices.Repositories
                 Description = p.Description,
                 Quantity = p.Quantity,
                 Price = p.Price,
-                ProductType = productTypeRepository.GetById(p.ProductTypeID)
+                ProductType = productTypeRepository.GetById(p.ProductTypeID),
+                MockForUser = MockUserData.MockUsers.FirstOrDefault(mc => mc.MockUserId == p.MockUserId)
             }).ToList();
 
             return productDTO;
@@ -94,6 +93,7 @@ namespace ProductsAndServices.Repositories
             product.Price = productDTO.Price;
             product.Quantity = productDTO.Quantity;
             product.ProductTypeID = productDTO.ProductTypeID;
+            product.MockUserId = productDTO.MockUserId;
 
             context.Products.Update(product);
             context.SaveChanges();
@@ -134,6 +134,7 @@ namespace ProductsAndServices.Repositories
             productDTO.Price = product.Price;
             productDTO.Quantity = product.Quantity;
             productDTO.ProductType = productTypeRepository.GetById(product.ProductTypeID);
+            productDTO.MockForUser = MockUserData.MockUsers.FirstOrDefault(mc => mc.MockUserId == product.MockUserId);
 
             return productDTO;
         }
@@ -156,7 +157,8 @@ namespace ProductsAndServices.Repositories
                 Description = p.Description,
                 Quantity = p.Quantity,
                 Price = p.Price,
-                ProductType = productTypeRepository.GetById(p.ProductTypeID)
+                ProductType = productTypeRepository.GetById(p.ProductTypeID),
+                MockForUser = MockUserData.MockUsers.FirstOrDefault(mc => mc.MockUserId == p.MockUserId)
             }).ToList();
 
             
@@ -181,7 +183,8 @@ namespace ProductsAndServices.Repositories
                 Description = p.Description,
                 Quantity = p.Quantity,
                 Price = p.Price,
-                ProductType = productTypeRepository.GetById(p.ProductTypeID)
+                ProductType = productTypeRepository.GetById(p.ProductTypeID),
+                MockForUser = MockUserData.MockUsers.FirstOrDefault(mc => mc.MockUserId == p.MockUserId)
             }).ToList();
 
             return productReadDTO;
@@ -206,7 +209,8 @@ namespace ProductsAndServices.Repositories
                 Description = p.Description,
                 Quantity = p.Quantity,
                 Price = p.Price,
-                ProductType = productTypeRepository.GetById(p.ProductTypeID)
+                ProductType = productTypeRepository.GetById(p.ProductTypeID),
+                MockForUser = MockUserData.MockUsers.FirstOrDefault(mc => mc.MockUserId == p.MockUserId)
             }).ToList();
 
             return productReadDTO;
@@ -229,7 +233,8 @@ namespace ProductsAndServices.Repositories
                 Description = p.Description,
                 Quantity = p.Quantity,
                 Price = p.Price,
-                ProductType = productTypeRepository.GetById(p.ProductTypeID)
+                ProductType = productTypeRepository.GetById(p.ProductTypeID),
+                MockForUser = MockUserData.MockUsers.FirstOrDefault(mc => mc.MockUserId == p.MockUserId)
             }).ToList();
 
             return productReadDTO;
