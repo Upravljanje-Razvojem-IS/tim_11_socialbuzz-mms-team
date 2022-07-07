@@ -13,10 +13,10 @@ namespace ProductsAndServices.Interfaces
 
         //dodatne metode
         ProductReadDTO GetById(int id);
-        ProductReadDTO GetByName(string name);
-        ProductReadDTO GetByDescription(string description);
-        ProductReadDTO GetByQuantity(int quantity);
-        ProductReadDTO GetByPrice(double price);
+        List<ProductReadDTO> GetByName(string name);
+        List<ProductReadDTO> GetByDescription(string description);
+        List<ProductReadDTO> GetByQuantity(int quantity);
+        List<ProductReadDTO> GetByPrice(double price);
 
     }
 }

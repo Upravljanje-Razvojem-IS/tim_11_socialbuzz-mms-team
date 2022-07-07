@@ -14,9 +14,9 @@ namespace ProductsAndServices.Interfaces
 
         //dodatne metode 
         ServiceReadDTO GetById(int id);
-        ServiceReadDTO GetByName(string name);
-        ServiceReadDTO GetByDescription(string description);
-        ServiceReadDTO GetByPrice(double price);
+        List<ServiceReadDTO> GetByName(string name);
+        List<ServiceReadDTO> GetByDescription(string description);
+        List<ServiceReadDTO> GetByPrice(double price);
 
     }
 }
