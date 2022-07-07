@@ -2,12 +2,27 @@
 
 namespace ProductsAndServices.Entities
 {
+    /// <summary>
+    /// Mock For User model
+    /// </summary>
     public class MockForUser
     {
+        /// <summary>
+        /// Id of mock user
+        /// </summary>
         public int Id { get; set; }
+        /// <summary>
+        /// First name of mock user
+        /// </summary>
         public string FirstName { get; set; }
 
+        /// <summary>
+        /// Last name of mock user
+        /// </summary>
         public string LastName { get; set; }
+        /// <summary>
+        /// Email of mock user
+        /// </summary>
         public string Email { get; set; }
     }
 
