@@ -39,6 +39,7 @@ namespace ProductsAndServices.Repositories
             serviceEf.Description = service.Description;
             serviceEf.Price = service.Price;
             serviceEf.ServiceTypeID = service.ServiceTypeID;
+            serviceEf.MockUserId = service.MockUserId;
 
             context.Services.Add(serviceEf);
             context.SaveChanges();
@@ -82,7 +83,8 @@ namespace ProductsAndServices.Repositories
                 Name = s.Name,
                 Description = s.Description,
                 Price = s.Price,
-                ServiceType = serviceTypeRepository.GetById(s.ServiceTypeID)
+                ServiceType = serviceTypeRepository.GetById(s.ServiceTypeID),
+                MockForUser = MockUserData.MockUsers.FirstOrDefault(mc => mc.MockUserId == s.MockUserId)
             }).ToList();
 
             return serviceDTO;
@@ -107,6 +109,7 @@ namespace ProductsAndServices.Repositories
             service.Description = serviceDTO.Description;
             service.Price = serviceDTO.Price;
             service.ServiceTypeID = serviceDTO.ServiceTypeID;
+            service.MockUserId = serviceDTO.MockUserId;
 
             context.Services.Update(service);
             context.SaveChanges();
@@ -134,6 +137,7 @@ namespace ProductsAndServices.Repositories
             serviceDTO.Description = service.Description;
             serviceDTO.Price = service.Price;
             serviceDTO.ServiceType = serviceTypeRepository.GetById(service.ServiceTypeID);
+            serviceDTO.MockForUser = MockUserData.MockUsers.FirstOrDefault(mc => mc.MockUserId == service.MockUserId);
 
             return serviceDTO;
         }
@@ -155,8 +159,9 @@ namespace ProductsAndServices.Repositories
                 Name = s.Name,
                 Description = s.Description,
                 Price = s.Price,
-                ServiceType = serviceTypeRepository.GetById(s.ServiceTypeID)
-            }).ToList();
+                ServiceType = serviceTypeRepository.GetById(s.ServiceTypeID),
+                MockForUser = MockUserData.MockUsers.FirstOrDefault(mc => mc.MockUserId == s.MockUserId)
+        }).ToList();
 
             return serviceDTO;
         }
@@ -178,7 +183,8 @@ namespace ProductsAndServices.Repositories
                 Name = s.Name,
                 Description = s.Description,
                 Price = s.Price,
-                ServiceType = serviceTypeRepository.GetById(s.ServiceTypeID)
+                ServiceType = serviceTypeRepository.GetById(s.ServiceTypeID),
+                MockForUser = MockUserData.MockUsers.FirstOrDefault(mc => mc.MockUserId == s.MockUserId)
             }).ToList();
 
             return serviceDTO;
@@ -200,7 +206,8 @@ namespace ProductsAndServices.Repositories
                 Name = s.Name,
                 Description = s.Description,
                 Price = s.Price,
-                ServiceType = serviceTypeRepository.GetById(s.ServiceTypeID)
+                ServiceType = serviceTypeRepository.GetById(s.ServiceTypeID),
+                MockForUser = MockUserData.MockUsers.FirstOrDefault(mc => mc.MockUserId == s.MockUserId)
             }).ToList();
 
             return serviceReadDTO;
