@@ -10,7 +10,7 @@ namespace ProductsAndServices.Entities
         /// <summary>
         /// Id of mock user
         /// </summary>
-        public int Id { get; set; }
+        public int MockUserId { get; set; }
         /// <summary>
         /// First name of mock user
         /// </summary>
@@ -28,10 +28,10 @@ namespace ProductsAndServices.Entities
 
     public static class MockUserData
     {
-        public static List<MockForUser> Users = new List<MockForUser>(){
+        public static List<MockForUser> MockUsers = new List<MockForUser>(){
             new MockForUser()
             {
-                Id = 1,
+                MockUserId = 1,
                 FirstName = "Lazar",
                 LastName = "Lazarevic",
                 Email = "laza.lazarevic@gmail.com"
@@ -39,7 +39,7 @@ namespace ProductsAndServices.Entities
 
             new MockForUser()
             {
-                Id = 2,
+                MockUserId = 2,
                 FirstName = "Milos",
                 LastName = "Milosevic",
                 Email = "milos.milosevic@yahoo.com"

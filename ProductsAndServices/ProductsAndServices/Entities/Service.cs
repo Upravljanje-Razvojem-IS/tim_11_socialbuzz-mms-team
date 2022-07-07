@@ -43,5 +43,10 @@ namespace ProductsAndServices.Entities
         /// Service type
         /// </summary>
         public virtual ServiceType ServiceType { get; set; }
+
+        /// <summary>
+        /// Foreign key of mock user
+        /// </summary>
+        public int MockUserId { get; set; }
     }
 }

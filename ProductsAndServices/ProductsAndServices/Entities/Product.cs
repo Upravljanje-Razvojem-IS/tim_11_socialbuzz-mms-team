@@ -49,5 +49,10 @@ namespace ProductsAndServices.Entities
         /// </summary>
         public virtual ProductType ProductType { get; set; }
 
+        /// <summary>
+        /// Foreign key of mock user
+        /// </summary>
+        public int MockUserId { get; set; }
+
     }
 }
