@@ -1,4 +1,5 @@
 ﻿using ProductsAndServices.DTOs.ProductTypeDTOs;
+using ProductsAndServices.Entities;
 
 namespace ProductsAndServices.DTOs.ProductDTOs
 {
@@ -36,5 +37,10 @@ namespace ProductsAndServices.DTOs.ProductDTOs
         /// Product type
         /// </summary>
         public ProductTypeReadDTO ProductType { get; set; }
+
+        /// <summary>
+        /// Mock for user
+        /// </summary>
+        public MockForUser MockForUser { get; set; }
     }
 }

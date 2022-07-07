@@ -26,8 +26,13 @@
         public double Price { get; set; }
 
         /// <summary>
-        /// Product dto foreign key product type
+        /// Product dto foreign key of product type
         /// </summary>
         public int ProductTypeID { get; set; }
+
+        /// <summary>
+        /// Product dto goreign key of mock user
+        /// </summary>
+        public int MockUserId { get; set; }
     }
 }
