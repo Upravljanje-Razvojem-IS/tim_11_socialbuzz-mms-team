@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using ProductsAndServices.DTOs.ServiceDTOs;
 using ProductsAndServices.Entities;
+using ProductsAndServices.Exceptions;
 using ProductsAndServices.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -13,28 +14,46 @@ namespace ProductsAndServices.Repositories
         //deklaracija parametara koji se prosledjuju konstruktoru
         private readonly DataContext context;
         private readonly IMapper mapper;
+        private readonly IServiceTypeRepository serviceTypeRepository;
 
         //konstruktor sa parametrima klase ServiceRepository
-        public ServiceRepository(DataContext context, IMapper mapper)
+        public ServiceRepository(DataContext context, IMapper mapper, IServiceTypeRepository serviceTypeRepository)
         {
             this.context = context;
             this.mapper = mapper;
+            this.serviceTypeRepository = serviceTypeRepository;
         }
 
         //metoda CreateService koja dodaje nov servis
+        //ZAVRSENA METODA
         public ServiceCreateDTO CreateService(ServiceCreateDTO service)
         {
-            var serviceEf = mapper.Map<Service>(service);
+
+            var serviceEf = new Service();
+            if (!CheckServiceTypeExists(service.ServiceTypeID))
+            {
+                throw new System.Exception("Foreign key violation!");
+            }
+
+            serviceEf.Name = service.Name;
+            serviceEf.Description = service.Description;
+            serviceEf.Price = service.Price;
+            serviceEf.ServiceTypeID = service.ServiceTypeID;
+
             context.Services.Add(serviceEf);
             context.SaveChanges();
+
             return service;
         }
 
+
         //metoda DeleteService koja brise servis po id-ju
+        //ZAVRSENA METODA
         public void DeleteService(int id)
         {
             var service = context.Services.FirstOrDefault(s => s.Id == id);
-            if(service == null)
+            //var service = context.Services.Find(id);
+            if (service == null)
             {
                 throw new Exception("Nije moguce obrisati!");
             }
@@ -44,95 +63,154 @@ namespace ProductsAndServices.Repositories
         }
 
         //metoda koja vraca sve servise
+        //ZAVRSENA METODA
         public List<ServiceReadDTO> GetAll()
         {
+            /*
             var service = context.Services.ToList();
             return mapper.Map<List<ServiceReadDTO>>(service);
+            */
+
+            var service = context.Services.ToList();
+            if (service.Count() < 0)
+            {
+                throw new AppException("No products in database!");
+            }
+            var serviceDTO = service.Select(s => new ServiceReadDTO
+            {
+                Id = s.Id,
+                Name = s.Name,
+                Description = s.Description,
+                Price = s.Price,
+                ServiceType = serviceTypeRepository.GetById(s.ServiceTypeID)
+            }).ToList();
+
+            return serviceDTO;
         }
 
         //metoda koja update-uje postojeci servis po id-ju
+        //ZAVRSENA METODA
         public ServiceCreateDTO UpdateService(int id, ServiceCreateDTO serviceDTO)
         {
             var service = context.Services.Find(id);
-            if(service == null)
+
+            if (service == null)
             {
-                throw new Exception("Nije pronadjen trazeni servis!");
+                throw new Exception("Not found!");
+            }
+            if (!CheckServiceTypeExists(service.ServiceTypeID))
+            {
+                throw new System.Exception("Foreign key exception!");
             }
 
             service.Name = serviceDTO.Name;
             service.Description = serviceDTO.Description;
             service.Price = serviceDTO.Price;
+            service.ServiceTypeID = serviceDTO.ServiceTypeID;
 
+            context.Services.Update(service);
             context.SaveChanges();
             return serviceDTO;
         }
 
         //dodatne Get metode
         //metoda koja vraca servis po id-ju
+        //ZAVRSENA METODA
         public ServiceReadDTO GetById(int id)
         {
             var service = context.Services.Find(id);
+            /*
             return mapper.Map<ServiceReadDTO>(service);
+            */
+
+            if (service == null)
+            {
+                throw new System.Exception("Service not found!");
+            }
+
+            var serviceDTO = new ServiceReadDTO();
+            serviceDTO.Id = service.Id;
+            serviceDTO.Name = service.Name;
+            serviceDTO.Description = service.Description;
+            serviceDTO.Price = service.Price;
+            serviceDTO.ServiceType = serviceTypeRepository.GetById(service.ServiceTypeID);
+
+            return serviceDTO;
         }
 
         //metoda koja vraca servis po imenu
-        public ServiceReadDTO GetByName(string name)
+        //ZAVRSENA METODA
+        List<ServiceReadDTO> IServiceRepository.GetByName(string name)
         {
-            var service = context.Services.FirstOrDefault(s => s.Name == name);
-            if(service == null)
+            var service = context.Services.Where(s => s.Name == name).ToList();
+
+            if (service.Count < 0)
             {
-                throw new Exception("Service is not found!");
+                throw new AppException("No services in database!");
             }
 
-            var serviceReadDTO = new ServiceReadDTO
+            var serviceDTO = service.Select(s => new ServiceReadDTO
             {
-                Id = service.Id,
-                Name = service.Name,
-                Description = service.Description,
-                Price = service.Price
-            };
+                Id = s.Id,
+                Name = s.Name,
+                Description = s.Description,
+                Price = s.Price,
+                ServiceType = serviceTypeRepository.GetById(s.ServiceTypeID)
+            }).ToList();
 
-            return serviceReadDTO;
+            return serviceDTO;
         }
 
         //metoda koja vraca servis po opisu
-        public ServiceReadDTO GetByDescription(string description)
+        //ZAVRSENA METODA
+        List<ServiceReadDTO> IServiceRepository.GetByDescription(string description)
         {
-            var service = context.Services.FirstOrDefault(s => s.Description == description);
-            if (service == null)
+            var service = context.Services.Where(s => s.Description == description).ToList();
+
+            if (service.Count < 0)
             {
-                throw new Exception("Service is not found!");
+                throw new AppException("No services in database!");
             }
 
-            var serviceReadDTO = new ServiceReadDTO
+            var serviceDTO = service.Select(s => new ServiceReadDTO
             {
-                Id = service.Id,
-                Name = service.Name,
-                Description = service.Description,
-                Price = service.Price
-            };
+                Id = s.Id,
+                Name = s.Name,
+                Description = s.Description,
+                Price = s.Price,
+                ServiceType = serviceTypeRepository.GetById(s.ServiceTypeID)
+            }).ToList();
 
-            return serviceReadDTO;
+            return serviceDTO;
         }
 
+        //ZAVRSENA METODA
         //metoda koja vraca servis po ceni
-        public ServiceReadDTO GetByPrice(double price)
+        List<ServiceReadDTO> IServiceRepository.GetByPrice(double price)
         {
-            var service = context.Services.FirstOrDefault(s => s.Price == price);
-            if (service == null)
+            var service = context.Services.Where(s => s.Price == price).ToList();
+            if (service.Count < 0)
             {
-                throw new Exception("Service is not found!");
+                throw new AppException("No services in database!");
             }
 
-            var serviceReadDTO = new ServiceReadDTO
+            var serviceReadDTO = service.Select(s => new ServiceReadDTO
             {
-                Id = service.Id,
-                Name = service.Name,
-                Description = service.Description,
-                Price = service.Price
-            };
+                Id = s.Id,
+                Name = s.Name,
+                Description = s.Description,
+                Price = s.Price,
+                ServiceType = serviceTypeRepository.GetById(s.ServiceTypeID)
+            }).ToList();
 
             return serviceReadDTO;
         }
+
+        //metoda za validaciju ID-ja
+        private bool CheckServiceTypeExists(int serviceTypeID)
+        {
+            return context.ServiceTypes.Any(st => st.ServiceTypeID == serviceTypeID);
+        }
+
     }
 }
