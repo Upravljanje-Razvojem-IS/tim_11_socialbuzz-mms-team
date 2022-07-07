@@ -1,5 +1,6 @@
 ﻿using System;
 using UserContentService.DTOs.UserDTOs;
+using UserContentService.Entities;
 
 namespace UserContentService.DTOs.AdDTOs
 {
@@ -11,5 +12,6 @@ namespace UserContentService.DTOs.AdDTOs
         public string Text { get; set; }
 
         public UserReadDTO User { get; set; }
+        public PASMock PAS { get; set; }
     }
 }

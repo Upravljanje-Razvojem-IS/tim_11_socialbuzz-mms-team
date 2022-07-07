@@ -25,6 +25,7 @@ namespace UserContentService.Repositories.impl
             ad.Text = adCreate.Text;
             ad.Title = adCreate.Title;
             ad.Date = System.DateTime.Now;
+            ad.PASId = adCreate.PASId;
             context.Ads.Add(ad);
             context.SaveChanges();
 
@@ -34,6 +35,8 @@ namespace UserContentService.Repositories.impl
             adDTO.Text = ad.Text;
             adDTO.Date = ad.Date;
             adDTO.User = userRep.GetById(ad.UserId);
+            adDTO.PAS = PASMockConstants.pASMocks.FirstOrDefault(e => e.Id == ad.PASId);
+
             return adDTO;
 
 
@@ -59,7 +62,8 @@ namespace UserContentService.Repositories.impl
                 Date = ad.Date,
                 Title = ad.Title,
                 Text = ad.Text,
-                User = userRep.GetById(ad.Id)
+                User = userRep.GetById(ad.Id),
+                PAS = PASMockConstants.pASMocks.FirstOrDefault(e => e.Id == ad.PASId)
             }).ToList();
             return adsDTO;
         }
@@ -79,7 +83,8 @@ namespace UserContentService.Repositories.impl
                 Date = ad.Date,
                 Title = ad.Title,
                 Text = ad.Text,
-                User = userRep.GetById(ad.UserId)
+                User = userRep.GetById(ad.UserId),
+                PAS = PASMockConstants.pASMocks.FirstOrDefault(e => e.Id == ad.PASId)
             }).ToList();
             return adsDTO;
 
@@ -96,6 +101,7 @@ namespace UserContentService.Repositories.impl
             adDTO.Text = ad.Text;
             adDTO.Date = ad.Date;
             adDTO.User = userRep.GetById(ad.UserId);
+            adDTO.PAS = PASMockConstants.pASMocks.FirstOrDefault(e => e.Id == ad.PASId);
             return adDTO;
 
         }
@@ -111,7 +117,8 @@ namespace UserContentService.Repositories.impl
                 Date = ad.Date,
                 Title = ad.Title,
                 Text = ad.Text,
-                User = userRep.GetById(ad.Id)
+                User = userRep.GetById(ad.Id),
+                PAS = PASMockConstants.pASMocks.FirstOrDefault(e => e.Id == ad.PASId)
             }).ToList();
             return adsDTO;
         }
@@ -127,7 +134,8 @@ namespace UserContentService.Repositories.impl
                 Date = ad.Date,
                 Title = ad.Title,
                 Text = ad.Text,
-                User = userRep.GetById(ad.Id)
+                User = userRep.GetById(ad.Id),
+                PAS = PASMockConstants.pASMocks.FirstOrDefault(e => e.Id == ad.PASId)
             }).ToList();
             return adsDTO;
         }
@@ -146,7 +154,8 @@ namespace UserContentService.Repositories.impl
                 Date = ad.Date,
                 Title = ad.Title,
                 Text = ad.Text,
-                User = userRep.GetById(ad.UserId)
+                User = userRep.GetById(ad.UserId),
+                PAS = PASMockConstants.pASMocks.FirstOrDefault(e => e.Id == ad.PASId)
             }).ToList();
             return adsDTO;
         }
@@ -172,6 +181,8 @@ namespace UserContentService.Repositories.impl
             adDTO.Text = ad.Text;
             adDTO.Date = ad.Date;
             adDTO.User = userRep.GetById(ad.UserId);
+            adDTO.PAS = PASMockConstants.pASMocks.FirstOrDefault(e => e.Id == ad.PASId);
+
             return adDTO;
 
         }
