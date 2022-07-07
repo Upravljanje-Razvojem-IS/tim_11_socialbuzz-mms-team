@@ -246,7 +246,12 @@
         </member>
         <member name="P:ProductsAndServices.DTOs.ProductDTOs.ProductCreateDTO.ProductTypeID">
             <summary>
-            Product dto foreign key product type
+            Product dto foreign key of product type
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.DTOs.ProductDTOs.ProductCreateDTO.MockUserId">
+            <summary>
+            Product dto goreign key of mock user
             </summary>
         </member>
         <member name="T:ProductsAndServices.DTOs.ProductDTOs.ProductReadDTO">
@@ -282,6 +287,11 @@
         <member name="P:ProductsAndServices.DTOs.ProductDTOs.ProductReadDTO.ProductType">
             <summary>
             Product type
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.DTOs.ProductDTOs.ProductReadDTO.MockForUser">
+            <summary>
+            Mock for user
             </summary>
         </member>
         <member name="T:ProductsAndServices.DTOs.ProductTypeDTOs.ProductTypeCreateDTO">
@@ -334,6 +344,11 @@
             Service dto foreign key service type
             </summary>
         </member>
+        <member name="P:ProductsAndServices.DTOs.ServiceDTOs.ServiceCreateDTO.MockUserId">
+            <summary>
+            Product dto goreign key of mock user
+            </summary>
+        </member>
         <member name="T:ProductsAndServices.DTOs.ServiceDTOs.ServiceReadDTO">
             <summary>
             Represents the service model
@@ -362,6 +377,11 @@
         <member name="P:ProductsAndServices.DTOs.ServiceDTOs.ServiceReadDTO.ServiceType">
             <summary>
             Service type
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.DTOs.ServiceDTOs.ServiceReadDTO.MockForUser">
+            <summary>
+            Mock for user
             </summary>
         </member>
         <member name="T:ProductsAndServices.DTOs.ServiceTypeDTOs.ServiceTypeCreateDTO">
@@ -394,7 +414,7 @@
             Mock For User model
             </summary>
         </member>
-        <member name="P:ProductsAndServices.Entities.MockForUser.Id">
+        <member name="P:ProductsAndServices.Entities.MockForUser.MockUserId">
             <summary>
             Id of mock user
             </summary>
@@ -454,6 +474,11 @@
             Product type
             </summary>
         </member>
+        <member name="P:ProductsAndServices.Entities.Product.MockUserId">
+            <summary>
+            Foreign key of mock user
+            </summary>
+        </member>
         <member name="T:ProductsAndServices.Entities.ProductType">
             <summary>
             Product Type model
@@ -502,6 +527,11 @@
         <member name="P:ProductsAndServices.Entities.Service.ServiceType">
             <summary>
             Service type
+            </summary>
+        </member>
+        <member name="P:ProductsAndServices.Entities.Service.MockUserId">
+            <summary>
+            Foreign key of mock user
             </summary>
         </member>
         <member name="T:ProductsAndServices.Entities.ServiceType">
